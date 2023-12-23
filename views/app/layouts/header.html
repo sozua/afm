@@ -1,0 +1,24 @@
+<header
+    class="sticky w-full flex justify-between items-center bg-white text-gray-950 top-0 left-0 px-8 py-4 mb-8 border border-b-gray-200">
+    <h1 class="text-teal-900 font-bold text-xl" hx-boost="true">
+        <a href="/">
+            AfM
+        </a>
+    </h1>
+    <ul class="flex gap-4 text-gray-700">
+        <li>
+            <a>
+                Pricing
+            </a>
+        </li>
+        <li>
+            <a>
+                Story
+            </a>
+        </li>
+    </ul>
+    <div>
+        <a hx-get="/login-modal" hx-target="body" hx-swap="beforeend"
+            class="transition text-teal-50 bg-teal-600 hover:bg-teal-500 px-4 py-2 rounded cursor-pointer">Log in</a>
+    </div>
+</header>
