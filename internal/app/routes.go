@@ -40,12 +40,22 @@ func (a *App) SetupRoutes(r *gin.Engine) {
 		fmt.Println("username: ", username)
 		fmt.Println("password: ", password)
 		if username == "admin" && password == "admin" {
+			newUserLink := "/users/" + username
+			c.Header("Link", "<"+newUserLink+">; rel=\"user\"")
 			c.Redirect(http.StatusMovedPermanently, "/account")
 			return
 		}
-		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"message": "invalid credentials",
+		gv := goview.New(goview.Config{
+			Root:      "views/_shared/partials",
+			Extension: ".html",
 		})
+		goview.Use(gv)
+		err := goview.Render(c.Writer, http.StatusUnauthorized, "simple-error.html", goview.M{
+			"message": "Invalid username or password",
+		})
+		if err != nil {
+			panic(err)
+		}
 	})
 	r.GET("/account", func(c *gin.Context) {
 		gv := goview.New(goview.Config{
